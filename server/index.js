@@ -5,9 +5,15 @@ const UserModel = require("./models/Users");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  (
+    origin: ["https://"],
+    methods: ["POST, "GET"],
+    credentials: true
+  )
+));
 
-mongoose.connect("mongodb://localhost:27017/registers", {
+mongoose.connect('mongodb+srv://saikollur18:saikollur<18@cluster0.7bins.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
