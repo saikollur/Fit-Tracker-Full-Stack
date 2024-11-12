@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-
-// Sample user data and default values
-const userData = {
-    weight: "Weight (kg)",
-    height: "Height (cm)",
-    daysTraining: "Days of Training per Week",
-    fitnessGoal: "Fitness Goal",
-    timeSpent: "Time Spent (min)",
-    caloriesBurned: "Calories Assumed to Burn",
-};
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 const Dashboard = () => {
     const [weight, setWeight] = useState('');
@@ -17,12 +8,19 @@ const Dashboard = () => {
     const [fitnessGoal, setFitnessGoal] = useState('');
     const [timeSpent, setTimeSpent] = useState('');
     const [caloriesBurned, setCaloriesBurned] = useState('');
+    
+    const navigate = useNavigate();  // Hook to navigate to another page
 
     const handleGenerateValues = () => {
         const randomTimeSpent = Math.floor(Math.random() * (180 - 30 + 1)) + 30; // Between 30 and 180 minutes
         const randomCalories = Math.floor(Math.random() * (1500 - 300 + 1)) + 300; // Between 300 and 1500 calories
         setTimeSpent(randomTimeSpent);
         setCaloriesBurned(randomCalories);
+    };
+
+    // Function to handle navigation when "Update Progress" is clicked
+    const handleUpdateProgress = () => {
+        navigate('/nutrition');  // Navigates to the Nutrition page
     };
 
     return (
@@ -32,7 +30,7 @@ const Dashboard = () => {
                 <div style={styles.card}>
                     <h3>User Information</h3>
                     <div style={styles.formGroup}>
-                        <label>{userData.weight}:</label>
+                        <label>Weight (kg):</label>
                         <input
                             type="number"
                             value={weight}
@@ -42,7 +40,7 @@ const Dashboard = () => {
                         />
                     </div>
                     <div style={styles.formGroup}>
-                        <label>{userData.height}:</label>
+                        <label>Height (cm):</label>
                         <input
                             type="number"
                             value={height}
@@ -52,7 +50,7 @@ const Dashboard = () => {
                         />
                     </div>
                     <div style={styles.formGroup}>
-                        <label>{userData.daysTraining}:</label>
+                        <label>Days of Training per Week:</label>
                         <input
                             type="number"
                             min="0"
@@ -64,7 +62,7 @@ const Dashboard = () => {
                         />
                     </div>
                     <div style={styles.formGroup}>
-                        <label>{userData.fitnessGoal}:</label>
+                        <label>Fitness Goal:</label>
                         <select
                             value={fitnessGoal}
                             onChange={(e) => setFitnessGoal(e.target.value)}
@@ -77,15 +75,17 @@ const Dashboard = () => {
                         </select>
                     </div>
                     <div style={styles.card}>
-                        <p><strong>{userData.timeSpent}:</strong> {timeSpent || 'N/A'}</p>
-                        <p><strong>{userData.caloriesBurned}:</strong> {caloriesBurned || 'N/A'}</p>
+                        <p><strong>Time Spent:</strong> {timeSpent || 'N/A'}</p>
+                        <p><strong>Calories Burned:</strong> {caloriesBurned || 'N/A'}</p>
                     </div>
                 </div>
                 <button onClick={handleGenerateValues} style={styles.button}>Update Progress</button>
+                <button onClick={handleUpdateProgress} style={styles.button}>Go to Nutrition</button> {/* New button */}
             </div>
         </div>
     );
 };
+
 
 // Styles for the components
 const styles = {

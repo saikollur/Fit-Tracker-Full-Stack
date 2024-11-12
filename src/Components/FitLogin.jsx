@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';  // Import useState
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const FitLogin = () => {
-    const navigate = useNavigate();  // useNavigate hook for navigation
+    const [email, setEmail] = useState("");  // Initialize useState with default values
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleLogin = (event) => {
         event.preventDefault();
-        alert("Login button clicked!"); // Placeholder action for login
+        axios.post('http://localhost:3001/register', { email, password })
+            .then(result => console.log(result))
+            navigate('/Dashboard')
+            .catch(err => console.log(err));
     };
 
     const handleSocialLogin = (platform) => {
-        alert('${platform} login clicked!'); // Placeholder action for social login
+        // Add the event parameter to handleSocialLogin
+        return (e) => {
+            e.preventDefault();  // Placeholder action for social login
+            console.log(`Logging in with ${platform}`);
+        };
     };
 
     return (
@@ -26,10 +36,23 @@ const FitLogin = () => {
                 
                 <form className="login-form" onSubmit={handleLogin}>
                     <div style={styles.inputGroup}>
-                        <input type="email" placeholder="Email" required style={styles.input} />
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            required 
+                            style={styles.input} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
                     </div>
+
                     <div style={styles.inputGroup}>
-                        <input type="password" placeholder="Password" required style={styles.input} />
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            required 
+                            style={styles.input}
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
                     </div>
                     <button type="submit" style={styles.button}>Login</button>
                 </form>
@@ -42,19 +65,19 @@ const FitLogin = () => {
                             src="https://img.icons8.com/color/48/000000/google-logo.png" 
                             alt="Google Login" 
                             style={styles.socialIcon} 
-                            onClick={() => handleSocialLogin('Google')}
+                            onClick={handleSocialLogin('Google')}
                         />
                         <img 
                             src="https://img.icons8.com/ios-filled/50/000000/github.png" 
                             alt="GitHub Login" 
                             style={styles.socialIcon} 
-                            onClick={() => handleSocialLogin('GitHub')}
+                            onClick={handleSocialLogin('GitHub')}
                         />
                         <img 
                             src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" 
                             alt="Facebook Login" 
                             style={styles.socialIcon} 
-                            onClick={() => handleSocialLogin('Facebook')}
+                            onClick={handleSocialLogin('Facebook')}
                         />
                     </div>
                 </div>
@@ -64,7 +87,7 @@ const FitLogin = () => {
                     <p style={styles.signupText}>Don't have an account?</p>
                     <button 
                         style={styles.signupButton} 
-                        onClick={() => navigate('/signup')} // Redirect to Signup page
+                        onClick={() => navigate('/signup')}
                     >
                         Sign Up
                     </button>

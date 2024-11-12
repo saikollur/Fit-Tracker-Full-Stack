@@ -1,7 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-
-// Import all your individual pages
+import { Routes, Route, NavLink } from 'react-router-dom';
 import Home from './Components/Home';
 import FitLogin from './Components/FitLogin';
 import DashboardPage from './Components/Dashboard';
@@ -19,23 +17,78 @@ function App() {
     <>
       {/* Navigation Menu */}
       <nav style={styles.navbar}>
-        <Link to="/" style={styles.link}>Home</Link>
-        <Link to="/login" style={styles.link}>FitLogin</Link>
-        <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-        <Link to="/progress" style={styles.link}>Progress Tracking</Link>
-        <Link to="/nutrition" style={styles.link}>Nutrition</Link>
-        <Link to="/workout" style={styles.link}>Workout Library</Link>
-        <Link to="/community" style={styles.link}>Community</Link>
-        <Link to="/help" style={styles.link}>Help/FAQ</Link>
-        <Link to="/settings" style={styles.link}>Settings</Link>
-        <Link to="/logout" style={styles.link}>Logout</Link>
-        <Link to="/signup" style={styles.link}>Sign Up</Link>
+        <NavLink 
+          to="/" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Home
+        </NavLink>
+        <NavLink 
+          to="/login" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          FitLogin
+        </NavLink>
+        <NavLink 
+          to="/dashboard" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Dashboard
+        </NavLink>
+        <NavLink 
+          to="/progress" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Progress Tracking
+        </NavLink>
+        <NavLink 
+          to="/nutrition" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Nutrition
+        </NavLink>
+        <NavLink 
+          to="/workout" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Workout Library
+        </NavLink>
+        <NavLink 
+          to="/community" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Community
+        </NavLink>
+        <NavLink 
+          to="/help" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Help/FAQ
+        </NavLink>
+        <NavLink 
+          to="/settings" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Settings
+        </NavLink>
+        <NavLink 
+          to="/logout" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Logout
+        </NavLink>
+        <NavLink 
+          to="/signup" 
+          style={({ isActive }) => ({ ...styles.link, color: isActive ? '#00ff00' : 'white' })}
+        >
+          Sign Up
+        </NavLink>
       </nav>
 
       {/* Define routes for each page */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login"element={<FitLogin/>}/>
+        <Route path="/login" element={<FitLogin />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/progress" element={<ProgressTrackingPage />} />
         <Route path="/nutrition" element={<NutritionPage />} />
@@ -45,6 +98,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
     </>
   );
@@ -53,14 +107,16 @@ function App() {
 const styles = {
   navbar: {
     display: 'flex',
-    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     backgroundColor: '#333',
     padding: '10px',
   },
   link: {
     color: 'white',
     textDecoration: 'none',
-    fontSize: '18px',
+    fontSize: '16px',
+    margin: '5px 10px',
   },
 };
 
