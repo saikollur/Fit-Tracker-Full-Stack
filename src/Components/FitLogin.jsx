@@ -9,7 +9,7 @@ const FitLogin = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:3001/register', { email, password })
+        axios.post('https://fit-tracker-full-stack-odb8.vercel.app/register', { email, password })
             .then(result => console.log(result))
             navigate('/Dashboard')
             .catch(err => console.log(err));
